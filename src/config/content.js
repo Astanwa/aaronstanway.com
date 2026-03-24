@@ -10,34 +10,13 @@ export const projects = [
     title: 'GLitchd',
     tagline: 'AI-Generated Content Detector',
     description:
-      'Real-time deepfake and AI-generated image/video detection. Chrome extension + API that scans content as you browse — Shazam for deepfakes.',
-    tech: ['Python', 'PyTorch', 'CLIP', 'FastAPI', 'Chrome Extension', 'Swift'],
+      'Real-time deepfake and AI-generated image/video detection platform. Chrome extension, REST API, and iOS app that scan content as you browse — Shazam for deepfakes.',
+    tech: ['Python', 'PyTorch', 'FastAPI', 'Chrome Extension', 'SwiftUI', 'Docker'],
     color: '#00ff41',
     url: 'https://gltchd.net',
     links: [
       { label: 'Visit gltchd.net', url: 'https://gltchd.net' },
-      { label: 'Chrome Web Store', url: '#' },
     ],
-  },
-  {
-    id: 'openclaw',
-    title: 'OpenClaw',
-    tagline: 'AI-Powered Operations Dashboard',
-    description:
-      'Unified command center for managing AI agents, outreach campaigns, and project orchestration. Built with a terminal-inspired UI.',
-    tech: ['React 19', 'FastAPI', 'SQLite', 'Claude API', 'Gmail API'],
-    color: '#00bfff',
-    links: [{ label: 'Dashboard', url: '#' }],
-  },
-  {
-    id: 'realeyes',
-    title: 'RealEyes API',
-    tagline: 'Content Authenticity Verification',
-    description:
-      'REST API for AI content detection. CLIP-based feature extraction with custom MLP classifier. Rate-limited, key-authenticated, production-ready.',
-    tech: ['Python', 'CLIP ViT-B/16', 'FastAPI', 'Docker', 'SQLite'],
-    color: '#ff6b35',
-    links: [{ label: 'API Reference', url: '#' }],
   },
   {
     id: 'lorenzo',
@@ -71,7 +50,7 @@ export const projects = [
       'The site you\'re looking at right now. A scroll-driven 3D journey through space built with React Three Fiber, bloom shaders, and post-processing.',
     tech: ['React', 'Three.js', 'R3F', 'GLSL', 'Framer Motion'],
     color: '#c084fc',
-    links: [{ label: 'Source Code', url: '#' }],
+    links: [{ label: 'Source Code', url: 'https://github.com/Astanwa/aaronstanway.com' }],
   },
 ]
 
