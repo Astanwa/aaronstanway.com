@@ -23,7 +23,14 @@ export default function MobileFallback() {
           <div key={p.id} className="mobile-project-card">
             <h3 style={{ color: p.color }}>{p.title}</h3>
             <p style={{ marginBottom: '0.5rem' }}>{p.tagline}</p>
-            <p style={{ color: '#e0e0e0', fontSize: '0.85rem' }}>{p.description}</p>
+            <p style={{ color: '#e0e0e0', fontSize: '0.85rem', marginBottom: '0.75rem' }}>{p.description}</p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              {p.links.filter((l) => l.url !== '#').map((link) => (
+                <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer" style={{ color: p.color, textDecoration: 'none', fontSize: '0.85rem' }}>
+                  → {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         ))}
       </motion.section>
