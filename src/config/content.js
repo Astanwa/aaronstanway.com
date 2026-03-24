@@ -43,6 +43,18 @@ export const projects = [
     ],
   },
   {
+    id: 'market-tester',
+    title: 'Market Tester Agent',
+    tagline: 'AI Marketing Simulator',
+    description:
+      'Multi-agent marketing simulation powered by MiroFish. Spawns thousands of autonomous agents with distinct personalities to A/B test ad campaigns, predict audience reactions, and optimize messaging — all in a digital sandbox before spending a dollar.',
+    tech: ['Python', 'MiroFish', 'Multi-Agent Simulation', 'Claude API'],
+    color: '#00bfff',
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Astanwa/Market-tester-agent-' },
+    ],
+  },
+  {
     id: 'portfolio',
     title: 'This Portfolio',
     tagline: '3D Immersive Experience',
