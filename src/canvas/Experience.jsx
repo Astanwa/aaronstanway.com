@@ -1,9 +1,7 @@
 import { Canvas } from '@react-three/fiber'
-import { ScrollControls } from '@react-three/drei'
+import { ScrollControls, Scroll, Text } from '@react-three/drei'
 import CameraRig from './CameraRig'
-import Environment from './Environment'
 import ParticleField from './effects/ParticleField'
-import PostProcessing from './effects/PostProcessing'
 import HeroSection from './sections/HeroSection'
 import ProjectsSection from './sections/ProjectsSection'
 import SkillsSection from './sections/SkillsSection'
@@ -22,23 +20,22 @@ export default function Experience({ onReady }) {
         failIfMajorPerformanceCaveat: false,
       }}
       style={{ position: 'fixed', inset: 0 }}
-      onCreated={() => {
-        // Signal that Three.js canvas is actually alive
-        onReady?.()
-      }}
+      onCreated={() => onReady?.()}
     >
-      <color attach="background" args={['#050510']} />
+      <color attach="background" args={['#070714']} />
+      <ambientLight intensity={0.4} />
+      <pointLight position={[10, 10, 10]} color="#00bfff" intensity={3} distance={100} />
+      <pointLight position={[-10, -5, -30]} color="#00ff41" intensity={2} distance={100} />
+      <pointLight position={[0, 8, -60]} color="#c084fc" intensity={2} distance={80} />
       <ScrollControls pages={5} damping={0.25}>
         <CameraRig />
-        <Environment />
-        <ParticleField count={2000} />
+        <ParticleField count={1500} />
         <HeroSection />
         <ProjectsSection />
         <SkillsSection />
         <AboutSection />
         <ContactSection />
       </ScrollControls>
-      <PostProcessing chromatic />
     </Canvas>
   )
 }
