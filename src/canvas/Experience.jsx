@@ -10,7 +10,7 @@ import SkillsSection from './sections/SkillsSection'
 import AboutSection from './sections/AboutSection'
 import ContactSection from './sections/ContactSection'
 
-export default function Experience() {
+export default function Experience({ onReady }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 8], fov: 50, near: 0.1, far: 200 }}
@@ -22,6 +22,10 @@ export default function Experience() {
         failIfMajorPerformanceCaveat: false,
       }}
       style={{ position: 'fixed', inset: 0 }}
+      onCreated={() => {
+        // Signal that Three.js canvas is actually alive
+        onReady?.()
+      }}
     >
       <color attach="background" args={['#050510']} />
       <ScrollControls pages={5} damping={0.25}>

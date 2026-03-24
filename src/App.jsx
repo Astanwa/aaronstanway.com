@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy, Component } from 'react'
+import { useState, useEffect, useCallback, Suspense, lazy, Component } from 'react'
 import LoadingScreen from './components/LoadingScreen'
 import MobileFallback from './components/MobileFallback'
 import HUD from './components/HUD'
@@ -38,32 +38,39 @@ function detectWebGL() {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
+  const [canvasReady, setCanvasReady] = useState(false)
+  const [loadingDone, setLoadingDone] = useState(false)
   const [timedOut, setTimedOut] = useState(false)
   const [hasWebGL] = useState(() => detectWebGL())
 
-  // If canvas doesn't signal ready in 8 seconds, show fallback
+  const handleCanvasReady = useCallback(() => {
+    setCanvasReady(true)
+  }, [])
+
+  // Show content once both canvas is ready AND loading animation finished
+  const showContent = canvasReady && loadingDone
+
+  // Timeout fallback — if canvas never signals ready in 10s, show 2D
   useEffect(() => {
     if (!hasWebGL) return
-    const timer = setTimeout(() => setTimedOut(true), 8000)
-    if (loaded) clearTimeout(timer)
+    if (canvasReady) return
+    const timer = setTimeout(() => setTimedOut(true), 10000)
     return () => clearTimeout(timer)
-  }, [loaded, hasWebGL])
+  }, [canvasReady, hasWebGL])
 
-  // No WebGL or timed out — show 2D fallback
   if (!hasWebGL || timedOut) {
     return <MobileFallback />
   }
 
   return (
     <>
-      {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
+      {!showContent && <LoadingScreen onComplete={() => setLoadingDone(true)} waitFor={canvasReady} />}
       <ErrorBoundary fallback={<MobileFallback />}>
-        <Suspense fallback={<LoadingScreen onComplete={() => {}} />}>
-          <Experience />
+        <Suspense fallback={null}>
+          <Experience onReady={handleCanvasReady} />
         </Suspense>
       </ErrorBoundary>
-      {loaded && <HUD />}
+      {showContent && <HUD />}
     </>
   )
 }

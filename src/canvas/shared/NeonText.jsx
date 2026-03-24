@@ -14,14 +14,11 @@ export default function NeonText({
       fontSize={fontSize}
       anchorX={anchorX}
       anchorY={anchorY}
+      color={color}
+      outlineColor={color}
+      outlineWidth={fontSize * 0.02}
       {...props}
     >
-      <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={2}
-        toneMapped={false}
-      />
       {children}
     </Text>
   )
