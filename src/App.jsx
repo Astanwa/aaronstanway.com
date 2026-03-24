@@ -1,5 +1,4 @@
-import { useState, Suspense, lazy, Component } from 'react'
-import { useMobile } from './hooks/useMobile'
+import { useState, useEffect, Suspense, lazy, Component } from 'react'
 import LoadingScreen from './components/LoadingScreen'
 import MobileFallback from './components/MobileFallback'
 import HUD from './components/HUD'
@@ -28,17 +27,31 @@ class ErrorBoundary extends Component {
   }
 }
 
-function AppInner() {
-  const [loaded, setLoaded] = useState(false)
-  const config = useMobile()
-
-  // Still detecting GPU tier
-  if (!config) {
-    return <LoadingScreen onComplete={() => {}} />
+function detectWebGL() {
+  try {
+    const canvas = document.createElement('canvas')
+    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+    return !!gl
+  } catch {
+    return false
   }
+}
 
-  // Low-end device — skip Three.js entirely
-  if (config.mode === 'fallback') {
+export default function App() {
+  const [loaded, setLoaded] = useState(false)
+  const [timedOut, setTimedOut] = useState(false)
+  const [hasWebGL] = useState(() => detectWebGL())
+
+  // If canvas doesn't signal ready in 8 seconds, show fallback
+  useEffect(() => {
+    if (!hasWebGL) return
+    const timer = setTimeout(() => setTimedOut(true), 8000)
+    if (loaded) clearTimeout(timer)
+    return () => clearTimeout(timer)
+  }, [loaded, hasWebGL])
+
+  // No WebGL or timed out — show 2D fallback
+  if (!hasWebGL || timedOut) {
     return <MobileFallback />
   }
 
@@ -47,14 +60,10 @@ function AppInner() {
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
       <ErrorBoundary fallback={<MobileFallback />}>
         <Suspense fallback={<LoadingScreen onComplete={() => {}} />}>
-          <Experience config={config} />
+          <Experience />
         </Suspense>
       </ErrorBoundary>
       {loaded && <HUD />}
     </>
   )
-}
-
-export default function App() {
-  return <AppInner />
 }

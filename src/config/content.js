@@ -1,5 +1,5 @@
 export const hero = {
-  name: 'Abenezer Seifu',
+  name: 'Aaron Stanway',
   tagline: 'Full-Stack Developer & AI Engineer',
   subtitle: 'Building intelligent systems that see through the noise.',
 }
