@@ -11,7 +11,7 @@ export const projects = [
     tagline: 'AI-Generated Content Detector',
     description:
       'Real-time deepfake and AI-generated image/video detection platform. Chrome extension, REST API, and iOS app that scan content as you browse — Shazam for deepfakes.',
-    tech: ['Python', 'PyTorch', 'FastAPI', 'Chrome Extension', 'SwiftUI', 'Docker'],
+    tech: ['Python', 'PyTorch', 'FastAPI', 'Chrome Extension', 'React Native', 'Expo', 'Docker'],
     color: '#00ff41',
     url: 'https://gltchd.net',
     links: [
