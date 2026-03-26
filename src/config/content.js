@@ -27,7 +27,7 @@ export const projects = [
     tech: ['Python', 'Blender 4.x', 'CalculiX', 'Gmsh', 'MCP Server'],
     color: '#f43f5e',
     links: [
-      { label: 'GitHub', url: 'https://github.com/Astanwa/Blender-Physics-Agent-' },
+      { label: 'Under Development', url: '#' },
     ],
   },
   {
@@ -39,7 +39,7 @@ export const projects = [
     tech: ['Python', 'Qiskit', 'Cirq', 'PennyLane', 'IBM Quantum', 'Claude API'],
     color: '#facc15',
     links: [
-      { label: 'GitHub', url: 'https://github.com/Astanwa/Stable-Collapse-' },
+      { label: 'Under Development', url: '#' },
     ],
   },
   {

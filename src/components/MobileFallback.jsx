@@ -25,11 +25,17 @@ export default function MobileFallback() {
             <p style={{ marginBottom: '0.5rem' }}>{p.tagline}</p>
             <p style={{ color: '#e0e0e0', fontSize: '0.85rem', marginBottom: '0.75rem' }}>{p.description}</p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              {p.links.filter((l) => l.url !== '#').map((link) => (
-                <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer" style={{ color: p.color, textDecoration: 'none', fontSize: '0.85rem' }}>
-                  → {link.label}
-                </a>
-              ))}
+              {p.links.map((link) =>
+                link.url === '#' ? (
+                  <span key={link.label} style={{ color: '#666', fontSize: '0.85rem', fontStyle: 'italic' }}>
+                    {link.label}
+                  </span>
+                ) : (
+                  <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer" style={{ color: p.color, textDecoration: 'none', fontSize: '0.85rem' }}>
+                    → {link.label}
+                  </a>
+                )
+              )}
             </div>
           </div>
         ))}
