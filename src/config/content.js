@@ -35,11 +35,11 @@ export const projects = [
     title: 'StableCollapse',
     tagline: 'Quantum Computing Agent',
     description:
-      'AI-powered quantum programming agent — "Cursor for Quantum Computing." Generates verified quantum circuits from natural language across Qiskit, Cirq, and PennyLane. Runs on IBM Quantum hardware with simulation verification.',
-    tech: ['Python', 'Qiskit', 'Cirq', 'PennyLane', 'IBM Quantum', 'Claude API'],
+      'AI-powered quantum programming agent — "Cursor for Quantum Computing." A multi-agent pipeline generates verified quantum circuits from natural language across Qiskit, Cirq, and PennyLane, executes them on IBM Quantum hardware, and encodes Bloomberg market data for quantum finance workloads. RAG-augmented generation is fine-tuned on Qwen 2.5 Coder 7B via LoRA.',
+    tech: ['Python', 'Qiskit v2', 'Cirq', 'PennyLane', 'IBM Quantum', 'RAG', 'LoRA / Qwen 2.5 Coder', 'Bloomberg API', 'Claude API'],
     color: '#facc15',
     links: [
-      { label: 'Under Development', url: '#' },
+      { label: 'Try the Playground', url: 'https://quantum.aaronstanway.com' },
     ],
   },
   {
