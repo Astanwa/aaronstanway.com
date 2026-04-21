@@ -39,7 +39,7 @@ export const projects = [
     tech: ['Python', 'Qiskit v2', 'Cirq', 'PennyLane', 'IBM Quantum', 'RAG', 'LoRA / Qwen 2.5 Coder', 'Bloomberg API', 'Claude API'],
     color: '#facc15',
     links: [
-      { label: 'Try the Playground', url: 'https://aaronstanway.com/quantum/' },
+      { label: 'Try the Playground', url: 'https://quantum.aaronstanway.com' },
     ],
   },
   {
