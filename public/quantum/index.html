@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StableCollapse - AI-Powered Quantum Programming</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <nav>
+            <div class="logo">
+                <span class="logo-icon">|&psi;&rang;</span>
+                <span class="logo-text">StableCollapse</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Demo</a>
+                <a href="#frameworks">Frameworks</a>
+                <div class="api-key-wrapper">
+                    <button id="settings-btn" class="settings-btn" title="API Settings">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        <span id="api-status-dot" class="status-dot disconnected"></span>
+                    </button>
+                    <div id="api-key-panel" class="api-key-panel">
+                        <div class="api-panel-header">API Configuration</div>
+                        <div class="api-field">
+                            <label class="api-label">Provider</label>
+                            <select id="provider-select">
+                                <option value="anthropic">Anthropic (Claude)</option>
+                                <option value="openai">OpenAI (GPT-4)</option>
+                            </select>
+                        </div>
+                        <div class="api-field">
+                            <label class="api-label">Model</label>
+                            <select id="model-select">
+                                <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option>
+                                <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5</option>
+                            </select>
+                        </div>
+                        <div class="api-field">
+                            <label class="api-label" id="api-key-label">API Key</label>
+                            <div class="api-input-row">
+                                <input type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off" />
+                                <button id="toggle-key-vis" class="toggle-vis-btn" title="Show/hide key">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="api-panel-actions">
+                            <button id="save-key-btn" class="btn btn-primary btn-sm">Save &amp; Verify</button>
+                            <button id="clear-key-btn" class="btn btn-secondary btn-sm">Clear</button>
+                        </div>
+                        <div id="api-status-msg" class="api-status-msg"></div>
+                        <div class="api-panel-divider"></div>
+                        <div class="api-panel-header">IBM Quantum</div>
+                        <div class="api-field">
+                            <label class="api-label">IBM Quantum Token</label>
+                            <div class="api-input-row">
+                                <input type="password" id="ibm-token-input" placeholder="your IBM Quantum API token..." autocomplete="off" />
+                                <button id="toggle-ibm-vis" class="toggle-vis-btn" title="Show/hide token">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="api-panel-actions">
+                            <button id="save-ibm-btn" class="btn btn-primary btn-sm">Save Token</button>
+                            <button id="clear-ibm-btn" class="btn btn-secondary btn-sm">Clear</button>
+                        </div>
+                        <div id="ibm-status-msg" class="api-status-msg"></div>
+                        <div class="api-panel-hint">
+                            Get your token at <a href="https://quantum.ibm.com/" target="_blank">quantum.ibm.com</a>
+                            <br><span class="hint-sub">Token is stored locally. Circuits run under your IBM account.</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://aaronstanway.com" class="btn-github">
+                    &larr; aaronstanway.com
+                </a>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-badge">Open Source &bull; Multi-Framework &bull; AI-Native</div>
+            <h1>
+                <span class="glitch" data-text="Cursor">Cursor</span> for
+                <span class="gradient-text">Quantum Computing</span>
+            </h1>
+            <p class="hero-subtitle">
+                Describe what you want in plain English. StableCollapse generates verified quantum circuits
+                across Qiskit, Cirq, and PennyLane &mdash; then runs them on IBM Quantum hardware.
+            </p>
+            <div class="hero-cta">
+                <a href="#demo" class="btn btn-primary">Try the Playground</a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="circuit-animation">
+                <div class="qubit-line" style="--delay: 0s">
+                    <span class="qubit-label">q[0]</span>
+                    <div class="gate h-gate">H</div>
+                    <div class="wire"></div>
+                    <div class="gate cx-gate">&bull;</div>
+                    <div class="wire"></div>
+                    <div class="gate m-gate">M</div>
+                </div>
+                <div class="qubit-line" style="--delay: 0.2s">
+                    <span class="qubit-label">q[1]</span>
+                    <div class="wire"></div>
+                    <div class="wire"></div>
+                    <div class="gate cx-target">&oplus;</div>
+                    <div class="wire"></div>
+                    <div class="gate m-gate">M</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>The Collapse Pipeline</h2>
+        <p class="section-subtitle">Six stages from natural language to verified quantum code</p>
+
+        <div class="pipeline">
+            <div class="pipeline-step">
+                <div class="step-number">01</div>
+                <h3>Interpret</h3>
+                <p>Classify your intent: generate, port, debug, optimize, or explain</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+                <div class="step-number">02</div>
+                <h3>Plan</h3>
+                <p>AI selects the optimal quantum algorithm for your problem</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+                <div class="step-number">03</div>
+                <h3>Generate</h3>
+                <p>Produce correct code in your target framework</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+                <div class="step-number">04</div>
+                <h3>Verify</h3>
+                <p>Simulate the circuit and validate output distributions</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+                <div class="step-number">05</div>
+                <h3>Optimize</h3>
+                <p>Hardware-aware transpilation for real QPU backends</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+                <div class="step-number">06</div>
+                <h3>Deliver</h3>
+                <p>Return code + explanation + cross-framework translations</p>
+            </div>
+        </div>
+
+        <div class="feature-cards">
+            <div class="card">
+                <div class="card-icon">&#x26A1;</div>
+                <h3>Multi-Framework</h3>
+                <p>Generate code in Qiskit, Cirq, PennyLane, or Q#. Port between any of them instantly.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#x1F9EA;</div>
+                <h3>Simulation Verified</h3>
+                <p>Every circuit is tested on a local simulator before delivery. No more "looks right but doesn't run."</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#x2699;</div>
+                <h3>IBM Quantum Ready</h3>
+                <p>Submit directly to IBM Quantum hardware. Auto-transpile for Eagle and Heron processors.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#x1F393;</div>
+                <h3>Adaptive Teaching</h3>
+                <p>Built-in quantum tutor that adapts to your expertise level. Learn by doing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <h2>Playground</h2>
+        <p class="section-subtitle">Describe your quantum program in plain English</p>
+
+        <div class="playground">
+            <div class="playground-input">
+                <div class="input-header">
+                    <span class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </span>
+                    <span class="input-title">StableCollapse</span>
+                </div>
+                <div class="input-body">
+                    <div class="framework-selector">
+                        <button class="fw-btn active" data-fw="qiskit">Qiskit</button>
+                        <button class="fw-btn" data-fw="cirq">Cirq</button>
+                        <button class="fw-btn" data-fw="pennylane">PennyLane</button>
+                    </div>
+                    <textarea id="prompt-input" placeholder="Create a 3-qubit GHZ state with measurement..."></textarea>
+                    <div class="input-actions">
+                        <select id="example-select">
+                            <option value="">Load example...</option>
+                            <option value="ghz">GHZ State (3 qubits)</option>
+                            <option value="grover">Grover's Search (2 qubits)</option>
+                            <option value="vqe">VQE for H2 molecule</option>
+                            <option value="qaoa">QAOA Max-Cut</option>
+                            <option value="teleport">Quantum Teleportation</option>
+                            <option value="qft">Quantum Fourier Transform</option>
+                        </select>
+                        <button id="generate-btn" class="btn btn-primary">
+                            <span class="btn-text">Generate</span>
+                            <span class="btn-loading" style="display:none">Collapsing...</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="playground-output">
+                <div class="output-header">
+                    <span class="output-title">Output</span>
+                    <span id="provider-badge" class="provider-badge" style="display:none"></span>
+                    <button id="copy-btn" class="copy-btn" style="display:none">Copy</button>
+                </div>
+                <div class="output-body">
+                    <div id="pipeline-tracker" class="pipeline-tracker" style="display:none">
+                        <div class="stage" data-stage="interpret">
+                            <span class="stage-icon">&#9675;</span>
+                            <span class="stage-label">Interpret</span>
+                            <span class="stage-detail" id="detail-interpret"></span>
+                        </div>
+                        <div class="stage" data-stage="plan">
+                            <span class="stage-icon">&#9675;</span>
+                            <span class="stage-label">Plan</span>
+                            <span class="stage-detail" id="detail-plan"></span>
+                        </div>
+                        <div class="stage" data-stage="generate">
+                            <span class="stage-icon">&#9675;</span>
+                            <span class="stage-label">Generate</span>
+                            <span class="stage-detail" id="detail-generate"></span>
+                        </div>
+                        <div class="stage" data-stage="verify">
+                            <span class="stage-icon">&#9675;</span>
+                            <span class="stage-label">Verify</span>
+                            <span class="stage-detail" id="detail-verify"></span>
+                        </div>
+                        <div class="stage" data-stage="optimize">
+                            <span class="stage-icon">&#9675;</span>
+                            <span class="stage-label">Optimize</span>
+                            <span class="stage-detail" id="detail-optimize"></span>
+                        </div>
+                        <div class="stage" data-stage="deliver">
+                            <span class="stage-icon">&#9675;</span>
+                            <span class="stage-label">Deliver</span>
+                            <span class="stage-detail" id="detail-deliver"></span>
+                        </div>
+                    </div>
+                    <pre id="code-output"><code>// Your quantum code will appear here...
+//
+// Try an example or describe what you want to build.
+// StableCollapse will generate verified quantum code
+// in your chosen framework.
+//
+// Add an API key (gear icon) to run the full
+// Collapse Pipeline with live AI generation.</code></pre>
+                    <div id="ibm-execute-panel" class="ibm-execute-panel" style="display:none">
+                        <div class="ibm-execute-header">
+                            <span>Run on IBM Quantum</span>
+                            <span id="ibm-backend-label" class="ibm-backend-label"></span>
+                        </div>
+                        <div class="ibm-execute-controls">
+                            <select id="ibm-backend-select">
+                                <option value="">Select backend...</option>
+                            </select>
+                            <input type="number" id="ibm-shots-input" value="4096" min="1" max="100000" title="Shots" />
+                            <button id="ibm-run-btn" class="btn btn-ibm">Execute</button>
+                        </div>
+                        <div id="ibm-job-status" class="ibm-job-status" style="display:none"></div>
+                    </div>
+                    <div id="ibm-results-panel" class="ibm-results-panel" style="display:none">
+                        <div class="ibm-results-header">
+                            <span>IBM Quantum Results</span>
+                            <span id="ibm-job-id" class="ibm-job-id"></span>
+                        </div>
+                        <div id="ibm-histogram" class="ibm-histogram"></div>
+                        <div id="ibm-results-meta" class="ibm-results-meta"></div>
+                    </div>
+                    <div id="explanation-output" class="explanation" style="display:none"></div>
+                    <div id="hardware-output" class="hardware-rec" style="display:none"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frameworks Section -->
+    <section id="frameworks" class="frameworks-section">
+        <h2>Supported Frameworks</h2>
+        <div class="framework-grid">
+            <div class="fw-card">
+                <h3>Qiskit</h3>
+                <p class="fw-version">v2.x</p>
+                <p>IBM's quantum SDK. Full Qiskit Runtime and IBM Quantum hardware integration.</p>
+            </div>
+            <div class="fw-card">
+                <h3>Cirq</h3>
+                <p class="fw-version">latest</p>
+                <p>Google's framework for NISQ algorithms. Low-level control and optimization.</p>
+            </div>
+            <div class="fw-card">
+                <h3>PennyLane</h3>
+                <p class="fw-version">latest</p>
+                <p>Xanadu's QML framework. Differentiable quantum programming with autodiff.</p>
+            </div>
+            <div class="fw-card coming-soon">
+                <h3>Q#</h3>
+                <p class="fw-version">coming soon</p>
+                <p>Microsoft's quantum language. Azure Quantum integration.</p>
+            </div>
+            <div class="fw-card coming-soon">
+                <h3>CUDA-Q</h3>
+                <p class="fw-version">coming soon</p>
+                <p>NVIDIA's hybrid quantum-classical platform for GPU-accelerated quantum.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Install Section -->
+    <section class="install-section">
+        <h2>Quick Start</h2>
+        <div class="install-block">
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Terminal</span>
+                    <button class="copy-btn" onclick="copyInstall()">Copy</button>
+                </div>
+                <pre><code id="install-code"><span class="prompt">$</span> pip install stable-collapse[qiskit]
+<span class="prompt">$</span> export ANTHROPIC_API_KEY=your-key
+<span class="prompt">$</span> export IBM_QUANTUM_TOKEN=your-token
+
+<span class="comment"># Generate quantum code</span>
+<span class="prompt">$</span> stablecollapse generate "Create a Bell state and measure it"
+
+<span class="comment"># Interactive mode</span>
+<span class="prompt">$</span> stablecollapse chat
+
+<span class="comment"># Port between frameworks</span>
+<span class="prompt">$</span> stablecollapse port my_circuit.py --to cirq
+
+<span class="comment"># Run on IBM Quantum hardware</span>
+<span class="prompt">$</span> stablecollapse ibm run my_circuit.py --backend ibm_torino</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon">|&psi;&rang;</span>
+                <span>StableCollapse</span>
+            </div>
+            <p>Open source. Built for the quantum future.</p>
+            <div class="footer-links">
+                <a href="https://aaronstanway.com">aaronstanway.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
